@@ -1,2 +1,10 @@
 server:
   port: 8080
+spring:
+  ai:
+    mcp:
+      server:
+        name: webmvc-mcp-server
+        version: 1.0.0
+        type: SYNC
+        sse-message-endpoint: /mcp/messages

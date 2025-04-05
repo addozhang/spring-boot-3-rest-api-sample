@@ -1,5 +1,7 @@
 package com.atbug.demo.controller;
 
+import org.springframework.ai.tool.annotation.Tool;
+import org.springframework.ai.tool.annotation.ToolParam;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
@@ -13,6 +15,7 @@ public class HelloController {
      * @return hardcoded hello world
      */
     @GetMapping("/hi")
+    @Tool(description = "say hello")
     public String hello() {
         return "Hello, world";
     }
@@ -24,7 +27,8 @@ public class HelloController {
      * @return hello message
      */
     @GetMapping("/hi/{name}")
-    public String helloTo(@PathVariable("name") String name) {
+    @Tool(description = "say hello to some guy")
+    public String helloTo(@PathVariable("name") @ToolParam(description = "name of the guy you want to say hello") String name) {
         return "Hello, " + name;
     }
 }

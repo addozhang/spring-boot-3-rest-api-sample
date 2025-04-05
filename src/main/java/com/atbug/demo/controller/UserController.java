@@ -1,5 +1,7 @@
 package com.atbug.demo.controller;
 
+import org.springframework.ai.tool.annotation.Tool;
+import org.springframework.ai.tool.annotation.ToolParam;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -21,6 +23,7 @@ public class UserController {
      * @return list of users
      */
     @GetMapping("/users")
+    @Tool(description = "Get all users")
     public List<User> getUsers() {
         return users;
     }
@@ -32,7 +35,8 @@ public class UserController {
      * @return success message
      */
     @PostMapping("/users")
-    public String addUser(User user) {
+    @Tool(description = "Add a new user")
+    public String addUser(@ToolParam(description = "user to add") User user) {
         users.add(user);
         return "User added successfully!";
     }
